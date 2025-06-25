@@ -1,6 +1,6 @@
 use std::fs;
 use std::path::Path;
-use serde_json::from_str;
+use serde_json::{Value, from_str};
 
 #[tokio::main]
 async fn main() {
@@ -10,11 +10,13 @@ async fn main() {
         let entry = entry.unwrap();
         
         let path = entry.path();
-        println!("{:?}", path);
+        
 
-        if path.extension().and_then(|s| s.to_str()) == Some("json") {
+        if path.is_dir() ==false && path.extension().and_then(|s| s.to_str()) == Some("json") {
             // Read file
-            let contents = fs::read_to_string(&path);
+            println!("{:?}", path);
+            let contents = fs::read_to_string(&path).unwrap();
+            println!("{:?}", is_valid_json(contents));
             // let secret_bytes: Vec<u8> = from_str(&contents).expect("valid JSON array");
             // let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
@@ -31,4 +33,8 @@ async fn main() {
             // println!("Converted and deleted {:?}", path);
         }
     }
+}
+
+fn is_valid_json(s: &str) -> bool {
+    serde_json::from_str::<Value>(s).is_ok()
 }
