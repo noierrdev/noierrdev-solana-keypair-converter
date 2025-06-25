@@ -5,10 +5,10 @@ use serde_json::from_str;
 #[tokio::main]
 async fn main() {
     let dir = "./"; // path to your directory
-    while let Ok(entry) = fs::read_dir(dir) {
+    for entry in fs::read_dir(dir) {
         let entry = entry;
         // println!("{:?}", entry);
-        // let path = entry.path();
+        let path = entry.path();
 
         // if path.extension().and_then(|s| s.to_str()) == Some("json") {
         //     // Read file
