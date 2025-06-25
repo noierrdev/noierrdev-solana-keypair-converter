@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::Path;
 use serde_json::{Value, from_str};
+use solana_sdk::signer::keypair::Keypair;
 
 #[tokio::main]
 async fn main() {
@@ -39,11 +40,23 @@ async fn main() {
                     continue;
                 }
             };
+
+            let keypair = match Keypair::from_bytes(&secret_arr) {
+                Ok(kp) => kp,
+                Err(err) => {
+                    println!("Error creating keypair from {:?}: {}", path, err);
+                    continue;
+                }
+            };
             // let secret_bytes: Vec<u8> = from_str(&contents).expect("valid JSON array");
             // let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
             // // Encode as base58 string
-            // let encoded = bs58::encode(secret_arr).into_string();
+            let private_key = bs58::encode(keypair.secret_bytes()).into_string();
+            let public_key = keypair.pubkey().to_string();
+
+            println!("{:?}",public_key);
+            println!("{:?}", private_key);
 
             // // Save string representation to file
             // let out_path = path.with_extension("txt");
@@ -52,7 +65,7 @@ async fn main() {
             // // Remove the original .json file
             // // fs::remove_file(&path)?;
 
-            // println!("Converted and deleted {:?}", path);
+            println!("Converted and deleted {:?}", path);
         }
     }
 }
