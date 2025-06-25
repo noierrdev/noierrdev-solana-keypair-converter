@@ -61,7 +61,7 @@ async fn main() {
 
             // // Save string representation to file
             let out_path = path.with_file_name(public_key).with_extension("txt");
-            fs::write(&out_path, &encoded);
+            fs::write(&out_path, private_key);
 
             // // Remove the original .json file
             // // fs::remove_file(&path)?;
