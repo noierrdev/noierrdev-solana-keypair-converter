@@ -16,7 +16,7 @@ async fn main() {
             // Read file
             println!("{:?}", path);
             let contents = fs::read_to_string(&path).unwrap();
-            println!("{:?}", is_valid_json(contents));
+            println!("{:?}", is_valid_json(&contents));
             // let secret_bytes: Vec<u8> = from_str(&contents).expect("valid JSON array");
             // let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
