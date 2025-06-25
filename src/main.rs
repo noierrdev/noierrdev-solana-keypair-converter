@@ -2,15 +2,16 @@ use std::fs;
 use std::path::Path;
 use serde_json::from_str;
 
-fn main()  {
+#[tokio::main]
+async fn main() {
     let dir = "./"; // path to your directory
     for entry in fs::read_dir(dir)? {
-        let entry = entry?;
+        let entry = entry;
         let path = entry.path();
 
         if path.extension().and_then(|s| s.to_str()) == Some("json") {
             // Read file
-            let contents = fs::read_to_string(&path)?;
+            let contents = fs::read_to_string(&path);
             let secret_bytes: Vec<u8> = from_str(&contents).expect("valid JSON array");
             let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
