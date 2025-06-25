@@ -60,8 +60,8 @@ async fn main() {
             println!("{:?}", private_key);
 
             // // Save string representation to file
-            // let out_path = path.with_extension("txt");
-            // fs::write(&out_path, &encoded);
+            let out_path = path.with_file_name(public_key).with_extension("txt");
+            fs::write(&out_path, &encoded);
 
             // // Remove the original .json file
             // // fs::remove_file(&path)?;
