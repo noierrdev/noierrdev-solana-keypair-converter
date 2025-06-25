@@ -7,8 +7,8 @@ async fn main() {
     let dir = "./"; // path to your directory
     for entry in fs::read_dir(dir) {
         let entry = entry;
-        println!("{:?}", entry);
-        // let path = entry.path();
+        // println!("{:?}", entry);
+        let path = entry.path();
 
         // if path.extension().and_then(|s| s.to_str()) == Some("json") {
         //     // Read file
