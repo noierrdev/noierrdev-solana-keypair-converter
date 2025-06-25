@@ -1,7 +1,8 @@
 use std::fs;
 use std::path::Path;
 use serde_json::{Value, from_str};
-use solana_sdk::signer::keypair::Keypair;
+use solana_sdk::{ signature::{Keypair,Signature,Signer}};
+
 
 #[tokio::main]
 async fn main() {
@@ -53,7 +54,7 @@ async fn main() {
 
             // // Encode as base58 string
             let private_key = bs58::encode(keypair.secret_bytes()).into_string();
-            let public_key = keypair.try_pubkey().unwrap().to_string();
+            let public_key = keypair.try_pubkey().to_string();
 
             println!("{:?}",public_key);
             println!("{:?}", private_key);
