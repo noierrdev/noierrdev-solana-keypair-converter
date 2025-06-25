@@ -5,7 +5,7 @@ use serde_json::from_str;
 #[tokio::main]
 async fn main() {
     let dir = "./"; // path to your directory
-    let mut dir_entries=fs::read_dir(dir).await;
+    let mut dir_entries=fs::read_dir(dir);
     for entry in  dir_entries{
         let entry = entry;
         // println!("{:?}", entry);
