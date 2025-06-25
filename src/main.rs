@@ -15,6 +15,7 @@ async fn main() {
         if path.is_dir() ==false && path.extension().and_then(|s| s.to_str()) == Some("json") {
             // Read file
             println!("{:?}", path);
+            let contents = fs::read_to_string(&path).unwrap();
             let secret_bytes: Vec<u8> = serde_json::from_str(&contents)
             .expect("Valid JSON array of bytes");
             let secret_arr: [u8; 64] = secret_bytes
