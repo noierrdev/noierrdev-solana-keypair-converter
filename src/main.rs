@@ -64,7 +64,7 @@ async fn main() {
             fs::write(&out_path, private_key);
 
             // // Remove the original .json file
-            // // fs::remove_file(&path)?;
+            fs::remove_file(&path)?;
 
             println!("Converted and deleted {:?}", path);
         }
