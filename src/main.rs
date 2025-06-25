@@ -6,7 +6,7 @@ use solana_sdk::{ signature::{Keypair,Signature,Signer}};
 
 #[tokio::main]
 async fn main() {
-    let dir = "./"; // path to your directory
+    let dir = "./bonk/"; // path to your directory
     let mut dir_entries=fs::read_dir(dir).unwrap();
     for entry in  dir_entries{
         let entry = entry.unwrap();
