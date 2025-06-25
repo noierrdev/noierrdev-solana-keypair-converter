@@ -8,8 +8,9 @@ async fn main() {
     let mut dir_entries=fs::read_dir(dir).unwrap();
     for entry in  dir_entries{
         let entry = entry.unwrap();
-        // println!("{:?}", entry);
+        
         let path = entry.path();
+        println!("{:?}", path);
 
         // if path.extension().and_then(|s| s.to_str()) == Some("json") {
         //     // Read file
