@@ -15,12 +15,30 @@ async fn main() {
         if path.is_dir() ==false && path.extension().and_then(|s| s.to_str()) == Some("json") {
             // Read file
             println!("{:?}", path);
-            let contents = fs::read_to_string(&path).unwrap();
-            let secret_bytes: Vec<u8> = serde_json::from_str(&contents)
-            .expect("Valid JSON array of bytes");
-            let secret_arr: [u8; 64] = secret_bytes
-            .try_into()
-            .expect("Expected 64-byte secret key");
+
+            let contents = match fs::read_to_string(&path) {
+                Ok(c) => c,
+                Err(_) => {
+                    println!("Could not read {:?}", path);
+                    continue;
+                }
+            };
+    
+
+            let secret_bytes: Vec<u8> = match serde_json::from_str(&contents) {
+                Ok(b) => b,
+                Err(_) => {
+                    println!("Invalid JSON in {:?}", path);
+                    continue;
+                }
+            };
+            let secret_arr: [u8; 64] = match secret_bytes.try_into() {
+                Ok(arr) => arr,
+                Err(_) => {
+                    println!("Not 64 bytes in {:?}", path);
+                    continue;
+                }
+            };
             // let secret_bytes: Vec<u8> = from_str(&contents).expect("valid JSON array");
             // let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
