@@ -9,7 +9,7 @@ async fn main() {
     for entry in  dir_entries{
         let entry = entry.unwrap();
         // println!("{:?}", entry);
-        let path = entry.path().unwrap();
+        let path = entry.path();
 
         // if path.extension().and_then(|s| s.to_str()) == Some("json") {
         //     // Read file
