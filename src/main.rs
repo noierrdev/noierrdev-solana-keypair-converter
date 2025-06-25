@@ -34,7 +34,7 @@ async fn main() {
                     continue;
                 }
             };
-            let secret_arr: [u8; 64] = match secret_bytes.try_into() {
+            let secret_arr: [u8; 64] = match secret_bytes.clone().try_into() {
                 Ok(arr) => arr,
                 Err(_) => {
                     println!("Not 64 bytes in {:?}", path);
