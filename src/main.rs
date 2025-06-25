@@ -22,7 +22,7 @@ fn main() -> std::io::Result<()> {
             fs::write(&out_path, &encoded)?;
 
             // Remove the original .json file
-            fs::remove_file(&path)?;
+            // fs::remove_file(&path)?;
 
             println!("Converted and deleted {:?}", path);
         }
