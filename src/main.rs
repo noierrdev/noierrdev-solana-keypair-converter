@@ -53,7 +53,7 @@ async fn main() {
             // let secret_arr: [u8; 64] = secret_bytes.try_into().expect("64-byte secret");
 
             // // Encode as base58 string
-            let private_key = bs58::encode(keypair.secret_bytes());
+            let private_key = bs58::encode(secret_bytes).into_string();
             let public_key = keypair.pubkey().to_string();
 
             println!("{:?}",public_key);
