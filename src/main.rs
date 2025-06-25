@@ -27,6 +27,6 @@ async fn main() {
         //     // fs::remove_file(&path)?;
 
         //     println!("Converted and deleted {:?}", path);
-        }
+        // }
     }
 }
