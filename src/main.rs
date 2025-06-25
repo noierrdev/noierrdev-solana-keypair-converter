@@ -19,7 +19,7 @@ fn main()  {
 
             // Save string representation to file
             let out_path = path.with_extension("txt");
-            fs::write(&out_path, &encoded)?;
+            fs::write(&out_path, &encoded).await;
 
             // Remove the original .json file
             // fs::remove_file(&path)?;
